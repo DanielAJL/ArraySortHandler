@@ -2,6 +2,7 @@ export default function ArraySortHandler(arr) {
   // order options will be 'asc' and 'desc' for now.
   // filter options will be 'number' and 'string' for now
   return function (order = '', filter = '') {
+    console.log('testing branch');
     if (!order) {
       console.error('ERROR: no order arg passed');
       return arr;
