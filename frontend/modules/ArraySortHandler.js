@@ -1,34 +1,34 @@
 export default function ArraySortHandler(arr) {
   // order options will be 'asc' and 'desc' for now.
   // filter options will be 'number' and 'string' for now
-  return function (order = '', filter = '') {
-    console.log('testing branch');
-    console.log('testing branch');
-    if (!order) {
-      console.error('ERROR: no order arg passed');
-      return arr;
-    }
+  // key option will hold the key value to sort
+  return function (order = '', filter = '', key = '') {
+    if (!arr) return;
 
-    // tempArr contains values that match the filter data type.
-    let tempArr = arr.filter((entry) => typeof entry === filter);
+    // filteredArr contains values that match the filter data type.
+    let filteredArr =
+      typeof arr[0] === 'object'
+        ? arr.filter((entry) => typeof entry[key] === filter)
+        : arr.filter((entry) => typeof entry === filter);
+
+    console.log('filteredArr', filteredArr);
 
     let sortedArr =
       order === 'desc'
-        ? tempArr.sort((a, b) => {
+        ? filteredArr.sort((a, b) => {
             if (typeof a === 'number') {
               return b - a;
             } else {
               return a.localeCompare(b);
             }
           })
-        : tempArr.sort((a, b) => {
+        : filteredArr.sort((a, b) => {
             if (typeof a === 'number') {
               return a - b;
             } else {
               return b.localeCompare(a);
             }
           });
-
     return sortedArr;
   };
 }
