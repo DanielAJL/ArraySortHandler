@@ -5,17 +5,22 @@ export default function ArraySortHandler(arr) {
   return function (order = '', filter = '', key = '') {
     if (!arr) return;
 
-    // filteredArr contains values that match the filter data type.
     let filteredArr =
       typeof arr[0] === 'object'
-        ? arr.filter((entry) => typeof entry[key] === filter)
+        ? // filter out invalid values
+          arr.filter((entry) => typeof entry[key] === filter)
         : arr.filter((entry) => typeof entry === filter);
-
-    console.log('filteredArr', filteredArr);
 
     let sortedArr =
       order === 'desc'
         ? filteredArr.sort((a, b) => {
+            if (typeof a === 'object') {
+              if (typeof a[key] === 'number') {
+                return b[key] - a[key];
+              } else {
+                return a[key].localeCompare(b[key]);
+              }
+            }
             if (typeof a === 'number') {
               return b - a;
             } else {
@@ -23,6 +28,13 @@ export default function ArraySortHandler(arr) {
             }
           })
         : filteredArr.sort((a, b) => {
+            if (typeof b === 'object') {
+              if (typeof b[key] === 'number') {
+                return a[key] - b[key];
+              } else {
+                return b[key].localeCompare(a[key]);
+              }
+            }
             if (typeof a === 'number') {
               return a - b;
             } else {

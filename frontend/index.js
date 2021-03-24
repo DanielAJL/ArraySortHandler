@@ -11,18 +11,22 @@ const objArray = [
   { name: 'Arjen', age: 79 },
 ];
 
-// const sortedArray = (arr, order, filter) => {
-//   let handler = new ArraySortHandler(arr);
-//   return handler(order, filter);
-// };
+// Example: sort array of values by value type.
+const sortedArray = (arr, order, filter) => {
+  let handler = new ArraySortHandler(arr);
+  return handler(order, filter);
+};
 
-// console.log('original array:', array);
-// console.log('sortedArray:', sortedArray(array, 'asc', 'number'));
-
+// Example: sort array of objects by key values and value type.
 const sortedObj = (arr, order, filter, key) => {
   let handler = new ArraySortHandler(arr);
   return handler(order, filter, key);
 };
 
+console.log('original array:', array);
+console.log('sortedArray:', sortedArray(array, 'asc', 'number'));
+console.log('sortedArray:', sortedArray(array, 'desc', 'string'));
+
 console.log('original array of objects:', objArray);
-console.log('sortedObj:', sortedObj(objArray, 'desc', 'number', 'age'));
+console.log('sortedObj - descending by name:', sortedObj(objArray, 'desc', 'string', 'name'));
+console.log('sortedObj - ascending by age:', sortedObj(objArray, 'asc', 'number', 'age'));
