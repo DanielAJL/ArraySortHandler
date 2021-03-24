@@ -18,13 +18,13 @@ export default function ArraySortHandler(arr) {
               if (typeof a[key] === 'number') {
                 return b[key] - a[key];
               } else {
-                return a[key].localeCompare(b[key]);
+                return b[key].localeCompare(a[key]);
               }
             }
             if (typeof a === 'number') {
               return b - a;
             } else {
-              return a.localeCompare(b);
+              return b.localeCompare(a);
             }
           })
         : filteredArr.sort((a, b) => {
@@ -32,13 +32,13 @@ export default function ArraySortHandler(arr) {
               if (typeof b[key] === 'number') {
                 return a[key] - b[key];
               } else {
-                return b[key].localeCompare(a[key]);
+                return a[key].localeCompare(b[key]);
               }
             }
-            if (typeof a === 'number') {
+            if (typeof b === 'number') {
               return a - b;
             } else {
-              return b.localeCompare(a);
+              return a.localeCompare(b);
             }
           });
     return sortedArr;
